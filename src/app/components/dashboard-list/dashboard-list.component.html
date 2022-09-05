@@ -1,7 +1,8 @@
 <ul>
+    <!--Duas formas para arrendodar para duas casa decimais-->
   <div *ngIf="isEuro === false">
     <li *ngFor="let item of list">
-      {{ item | currency }}
+      {{ item.toFixed(2) }}
     </li>
   </div>
   <div *ngIf="isEuro === true">
