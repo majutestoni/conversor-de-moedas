@@ -1,0 +1,50 @@
+<div class="contain">
+  <div class="col">
+    <p class="text">conversor de moedas</p>
+
+    <div class="s6">
+      <form (ngSubmit)="addList()">
+        <label class="sm">
+          <p>Digite o valor</p>
+          <input type="text" [(ngModel)]="valor" name="valor" />
+        </label>
+
+        <div class="transfer">
+          <label for="">
+            <p>From</p>
+            <select
+              [(ngModel)]="inputCoin"
+              name="inputCoin"
+              [value]="moedas"
+              class="select-text"
+            >
+              <option *ngFor="let item of moedas">{{ item.name }}</option>
+            </select>
+          </label>
+          <div class="convert">
+            <span>→</span>
+          </div>
+          <label for="">
+            <p>To</p>
+            <select
+              [(ngModel)]="selectedCoin"
+              name="selectedCoin"
+              [value]="moedas"
+              class="select-text"
+            >
+              <option *ngFor="let item of moedas">{{ item.name }}</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="button">
+          <button class="btn" href="" type="submit">Converter</button>
+        </div>
+      </form>
+    </div>
+    <div class="s2">
+      <p class="texto">conversões feitas</p>
+      <div class="conversion"><app-dashboard-list></app-dashboard-list></div>
+    </div>
+  </div>
+</div>
