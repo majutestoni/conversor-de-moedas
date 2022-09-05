@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { ConversorServiceService } from 'src/app/services/conversor-service.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { ConversorServiceService } from 'src/app/services/conversor-service.serv
 })
 export class DashboardListComponent implements OnInit {
   list: any = [];
+  @Input() isEuro:boolean = false
   constructor(private service: ConversorServiceService) {}
 
   ngOnInit(): void {

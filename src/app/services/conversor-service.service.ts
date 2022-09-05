@@ -10,55 +10,19 @@ export class ConversorServiceService {
   valorFinal: any;
   moedaValor: any;
 
-  public coins$:Observable<any> 
+  public coins$: Observable<any>;
 
-   url = 'https://economia.awesomeapi.com.br/last'
+  url = 'https://economia.awesomeapi.com.br/last';
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(){
+  ngOnInit() {}
+
+  convert(id): Observable<any> {
+    return this.http.get(`${this.url}/${id}`);
   }
 
-  convert(){
-    this.http.get(this.url)
+  addNewList(value) {
+    this.list.push(value);
   }
-
-  addNewList(valor, selectedCoin, inputCoin) {
-    if (inputCoin == 'Real') {
-      if (selectedCoin == 'Dolar') {
-        this.moedaValor = 5;
-        this.divisao(valor);
-      } else {
-        this.moedaValor = 10;
-        this.divisao(valor);
-      }
-    } else if (inputCoin == 'Dolar') {
-      if (selectedCoin == 'Real') {
-        this.moedaValor = 5;
-        this.multiplicacao(valor);
-      } else {
-        this.moedaValor = 5;
-        this.divisao(valor);
-      }
-    } else {
-      if (selectedCoin == 'Real') {
-        this.moedaValor = 10;
-        this.multiplicacao(valor);
-      } else {
-        this.moedaValor = 5;
-        this.multiplicacao(valor);
-      }
-    }
-
-    this.list.push(this.valorFinal);
-  }
-
-  multiplicacao(valor) {
-    this.valorFinal = valor * this.moedaValor;
-  }
-
-  divisao(valor) {
-    this.valorFinal = valor / this.moedaValor;
-  }
-
 }

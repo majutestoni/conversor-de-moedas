@@ -1,5 +1,12 @@
 <ul>
+  <div *ngIf="isEuro === false">
     <li *ngFor="let item of list">
-        {{item}}
+      {{ item | currency }}
     </li>
+  </div>
+  <div *ngIf="isEuro === true">
+    <li *ngFor="let item of list">
+      {{ item | currency: "EUR" }}
+    </li>
+  </div>
 </ul>

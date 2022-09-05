@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ConversorServiceService } from 'src/app/services/conversor-service.service';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-
 
 @Component({
   selector: 'app-dashboard',
@@ -13,28 +10,29 @@ export class DashboardComponent implements OnInit {
   valor: any;
   selectedCoin: any;
   inputCoin: any;
-  data: Date
-  public coins$:Observable<any> 
+  data: Date;
+  isEuro = false;
 
-  constructor(private service: ConversorServiceService, private http: HttpClient) {}
+  constructor(private service: ConversorServiceService) {}
 
-  ngOnInit(){
-   // this.http.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL")
-   // .subscribe(d => console.log(d)) -> Forma para debugar uma api
-
-    this.coins$ =  this.http.get("https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL")
-
-  }
+  ngOnInit() {}
 
   moedas: any = [
-    { id: 1, name: 'Dolar' },
-    { id: 2, name: 'Real' },
-    { id: 3, name: 'Euro' },
+    { id: 'USD-BRL', name: 'Dolar' },
+    { id: 'EUR-BRL', name: 'Euro' },
   ];
 
-  addList(): void {
-    this.data = new Date
-    this.service.addNewList(this.valor, this.selectedCoin, this.inputCoin);
-    this.valor = '';
+  convertForApi() {
+    if (this.selectedCoin === 'EUR-BRL') {
+      this.isEuro = true;
+    }
+
+    this.service
+      .convert(this.selectedCoin)
+      .subscribe((sucess) =>
+        sucess.USDBRL
+          ? this.service.addNewList(this.valor / sucess.USDBRL.low)
+          : this.service.addNewList(this.valor / sucess.EURBRL.low)
+      );
   }
 }

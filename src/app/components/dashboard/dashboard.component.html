@@ -3,7 +3,7 @@
     <p class="text">conversor de moedas</p>
 
     <div class="s6">
-      <form (ngSubmit)="addList()">
+      <form>
         <label class="sm">
           <p>Digite o valor</p>
           <input type="text" [(ngModel)]="valor" name="valor" />
@@ -12,13 +12,8 @@
         <div class="transfer">
           <label for="">
             <p>From</p>
-            <select
-              [(ngModel)]="inputCoin"
-              name="inputCoin"
-              [value]="moedas"
-              class="select-text"
-            >
-              <option *ngFor="let item of moedas">{{ item.name }}</option>
+            <select class="select-text">
+              <option value="Real">Real</option>
             </select>
           </label>
           <div class="convert">
@@ -29,22 +24,24 @@
             <select
               [(ngModel)]="selectedCoin"
               name="selectedCoin"
-              [value]="moedas"
+              [value]="moedas.id"
               class="select-text"
             >
-              <option *ngFor="let item of moedas">{{ item.name }}</option>
+              <option *ngFor="let item of moedas">{{ item.id }}</option>
             </select>
           </label>
         </div>
 
         <div class="button">
-          <button class="btn" href="" type="submit">Converter</button>
+          <button class="btn" href="" type="submit" (click)="convertForApi()">
+            Converter
+          </button>
         </div>
       </form>
     </div>
     <div class="s2">
       <p class="texto">conversões feitas</p>
-      <div class="conversion"><app-dashboard-list></app-dashboard-list></div>
+      <div class="conversion"><app-dashboard-list [isEuro]="isEuro"></app-dashboard-list></div>
     </div>
   </div>
 </div>
