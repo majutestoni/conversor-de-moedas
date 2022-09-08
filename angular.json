@@ -121,6 +121,12 @@
               "devServerTarget": "conversorMoedas:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "/conversor-de-moedas/"
+          }
         }
       }
     }},
